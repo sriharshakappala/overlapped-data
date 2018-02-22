@@ -26,6 +26,8 @@ def merge_data fragment1, fragment2
     return [fragment2]
   elsif (fragment1[:start] >= fragment2[:start]) && (fragment1[:end] >= fragment2[:end])
     return [{start: fragment2[:start], end: fragment1[:end]}]
+  elsif (fragment1[:start] <= fragment2[:start]) && (fragment1[:end] <= fragment2[:end]) && (fragment1[:end] >= fragment2[:start])
+    return [{start: fragment1[:start], end: fragment2[:end]}]
   elsif (fragment1[:start] <= fragment2[:start]) && (fragment1[:end] <= fragment2[:end])
     return [fragment1, fragment2]
   end
@@ -37,7 +39,10 @@ data = [
   {start: 0, end: 3},
   {start: 5, end: 10},
   {start: 40, end: 50},
-  {start: 55, end: 57}
+  {start: 55, end: 57},
+  {start: 9, end: 27},
+  {start: 19, end: 37},
+  {start: 37, end: 40},
 ]
 
 find_overlapped_data data
